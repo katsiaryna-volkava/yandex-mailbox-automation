@@ -3,6 +3,8 @@ package pages.mailbox.items;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.letters.templates.DraftLetterTemplatePage;
@@ -21,7 +23,7 @@ public class DraftsPage extends BasePage {
 
     public DraftLetterTemplatePage openDraftLetter() {
         waitForPageToBeLoaded();
-        draftLetter.click();
+        new Actions(driver).click(draftLetter).build().perform();
         return new DraftLetterTemplatePage(driver);
     }
 

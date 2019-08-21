@@ -1,6 +1,5 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.CommonPage;
 import pages.logining.HomePage;
 
 import java.util.ArrayList;
@@ -21,19 +20,16 @@ public class TestRunner extends SetUpAndTearDown {
     public void userIsLoggedInIntoMailbox() {
         String actualMailboxName =  new HomePage(driver)
                 .proceedToLoginPage()
-                .userEntersLoginName()
-                .userEntersPasswordValue()
+                .enterCredentials()
                 .findTheNameOfMailboxYouAreLoggedInto();
         Assert.assertEquals(actualMailboxName, "cdp-automation2");
     }
 
     @Test(priority = 2)
     public void userCanFindUnsavedLetterInDraftsFolder() {
-        new CommonOperations().loginToMailbox(driver);
         List<String> actualDraftLetterFields = new HomePage(driver)
                 .proceedToLoginPage()
-                .userEntersLoginName()
-                .userEntersPasswordValue()
+                .enterCredentials()
                 .openTemplateForWritingNewLetter()
                 .fillInLetterFields()
                 .closeLetterWithoutSaving()
@@ -47,8 +43,7 @@ public class TestRunner extends SetUpAndTearDown {
     public void userCanSendTheLetterSavedAsDraft() throws InterruptedException {
         String actualSentLetterBody = new HomePage(driver)
                 .proceedToLoginPage()
-                .userEntersLoginName()
-                .userEntersPasswordValue()
+                .enterCredentials()
                 .openTemplateForWritingNewLetter()
                 .fillInLetterFields()
                 .closeLetterWithoutSaving()
@@ -63,11 +58,9 @@ public class TestRunner extends SetUpAndTearDown {
 
     @Test(priority = 4)
     public void userIsLoggedOffFromMailbox() {
-        new CommonOperations().loginToMailbox(driver);
         boolean isButtonPresent = new HomePage(driver)
                 .proceedToLoginPage()
-                .userEntersLoginName()
-                .userEntersPasswordValue()
+                .enterCredentials()
                 .exitFromCurrentMailbox()
                 .checkThatYouHaveLoggedOff();
         Assert.assertTrue(isButtonPresent);

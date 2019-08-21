@@ -29,6 +29,13 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    public CommonPage enterCredentials() {
+        userEntersLoginName();
+        userEntersPasswordValue();
+        return new CommonPage(driver);
+}
+
+
     public LoginPage userEntersLoginName() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
         loginField.click();
