@@ -1,11 +1,11 @@
-package pages.mailbox.items;
+package pages.items;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
-import pages.letters.templates.SentLetterTemplatePage;
+import pages.templates.SentLetterTemplatePage;
 import utils.WaitUtils;
 
 public class SentMailPage extends BasePage {

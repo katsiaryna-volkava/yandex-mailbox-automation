@@ -1,28 +1,32 @@
+import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.logining.HomePage;
+import pages.authorization.HomePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestRunner extends SetUpAndTearDown {
 
-    private static final String EXPECTED_LETTER_SUBJECT = "automation task";
-    private final List<String> expectedLetterFields;
+    private static final String EXPECTED_LETTER_SUBJECT = TestData.getMailSubjectValue();
+    private final String EXPECTED_MAILBOX_NAME = TestData.getLoginNameValue();
+    private final String EXPECTED_LETTER_BODY = TestData.getMailBodyValue();
+
+    private final List<String> EXPECTED_LETTER_FIELDS;
 
     {
-        expectedLetterFields = new ArrayList<>();
-        expectedLetterFields.add("automation task");
-        expectedLetterFields.add("This is test task for webdriever module.");
+        EXPECTED_LETTER_FIELDS = new ArrayList<>();
+        EXPECTED_LETTER_FIELDS.add(EXPECTED_LETTER_SUBJECT);
+        EXPECTED_LETTER_FIELDS.add(EXPECTED_LETTER_BODY);
     }
 
     @Test(priority = 1)
     public void userIsLoggedInIntoMailbox() {
-        String actualMailboxName =  new HomePage(driver)
+        String actualMailboxName = new HomePage(driver)
                 .proceedToLoginPage()
                 .enterCredentials()
                 .findTheNameOfMailboxYouAreLoggedInto();
-        Assert.assertEquals(actualMailboxName, "cdp-automation2");
+        Assert.assertEquals(actualMailboxName, EXPECTED_MAILBOX_NAME);
     }
 
     @Test(priority = 2)
@@ -36,11 +40,11 @@ public class TestRunner extends SetUpAndTearDown {
                 .goToDraftsPage()
                 .openDraftLetter()
                 .findLetterAttributes();
-        Assert.assertEquals(actualDraftLetterFields, expectedLetterFields);
+        Assert.assertEquals(actualDraftLetterFields, EXPECTED_LETTER_FIELDS);
     }
 
     @Test(priority = 3)
-    public void userCanSendTheLetterSavedAsDraft() throws InterruptedException {
+    public void userCanSendTheLetterSavedAsDraft() {
         String actualSentLetterBody = new HomePage(driver)
                 .proceedToLoginPage()
                 .enterCredentials()

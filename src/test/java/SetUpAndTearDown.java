@@ -1,12 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import pages.CommonPage;
-import pages.letters.templates.DraftLetterTemplatePage;
-import pages.logining.HomePage;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class SetUpAndTearDown {
 

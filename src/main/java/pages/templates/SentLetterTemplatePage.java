@@ -1,4 +1,4 @@
-package pages.letters.templates;
+package pages.templates;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,7 @@ public class SentLetterTemplatePage extends BasePage {
         super(driver);
     }
 
-    public String checkThatMailBodyIsCorrect() throws InterruptedException {
+    public String checkThatMailBodyIsCorrect() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(SENT_LETTER_SUBJECT));
         String actualLetterSubject = letterSubject.getText();
         return actualLetterSubject;

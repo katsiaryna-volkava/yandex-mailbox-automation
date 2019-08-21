@@ -1,5 +1,6 @@
-package pages.logining;
+package pages.authorization;
 
+import data.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +14,9 @@ public class LoginPage extends BasePage {
     private static final String LOGIN_INPUT = "//input[@type='text' and @name='login']";
     private static final String PASSWORD_INPUT = "//input[@type='password' and @name='passwd']";
     private static final String PROCEED_BUTTON = "//button[@type='submit']";
-    private static final String LOGIN_NAME_VALUE = "cdp-automation2";
-    private static final String PASSWORD_VALUE = "qwerty1234";
+
+    String loginData = TestData.getLoginNameValue();
+    String passwordData = TestData.getPasswordValue();
 
     @FindBy(xpath = LOGIN_INPUT)
     private WebElement loginField;
@@ -33,13 +35,13 @@ public class LoginPage extends BasePage {
         userEntersLoginName();
         userEntersPasswordValue();
         return new CommonPage(driver);
-}
+    }
 
 
     public LoginPage userEntersLoginName() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
         loginField.click();
-        loginField.sendKeys(LOGIN_NAME_VALUE);
+        loginField.sendKeys(loginData);
         proceedButton.click();
         return this;
     }
@@ -47,7 +49,7 @@ public class LoginPage extends BasePage {
     public CommonPage userEntersPasswordValue() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
         passwordField.click();
-        passwordField.sendKeys(PASSWORD_VALUE);
+        passwordField.sendKeys(passwordData);
         proceedButton.click();
         return new CommonPage(driver);
     }

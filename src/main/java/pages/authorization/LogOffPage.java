@@ -1,4 +1,4 @@
-package pages.logining;
+package pages.authorization;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

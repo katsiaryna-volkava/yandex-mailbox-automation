@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import pages.letters.templates.DraftLetterTemplatePage;
-import pages.logining.LogOffPage;
-import pages.logining.LoginPage;
-import pages.mailbox.items.DraftsPage;
-import pages.mailbox.items.SentMailPage;
+import pages.templates.DraftLetterTemplatePage;
+import pages.authorization.LoginPage;
+import pages.items.DraftsPage;
+import pages.items.SentMailPage;
 import utils.WaitUtils;
 
 public class CommonPage extends BasePage {

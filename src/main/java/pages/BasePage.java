@@ -22,7 +22,7 @@ public abstract class BasePage {
 
     protected abstract void waitForPageToBeLoaded();
 
-    protected void resfreshCurrentPage()  {
+    protected void resfreshCurrentPage() {
         new Actions(driver).sendKeys(Keys.F5).build().perform();
     }
 

@@ -1,5 +1,6 @@
-package pages.letters.templates;
+package pages.templates;
 
+import data.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,14 +23,12 @@ public class DraftLetterTemplatePage extends BasePage {
     private static final String CLOSE_CONFIRMATION_BUTTON = "//div[@class='_nb-popup-buttons']/button[@data-action='save']";
     private static final String MAIL_BODY_FIELD = "//div[@role='textbox']";
     private static final String SEND_LETTER_BUTTON = "//button[contains(@class, '_init js-send-button')]";
-
-    private static final String MAIL_RECIPIENT_VALUE = "katsiaryna_volkava@gmail.com";
-    private static final String MAIL_SUBJECT_VALUE = "automation task";
-    private static final String MAIL_BODY_VALUE = "This is test task for webdriever module.";
     private static final String CAPTCHA_POPUP = "//div[@class='b-popup__p']]";
     private static final String CAPTCHA_INPUT_FIELD = "//input[contains(@class,'s-captcha-input')]";
 
-
+    private String mailSubject = TestData.getMailSubjectValue();
+    private String mailRecipient = TestData.getMailRecipientValue();
+    private String mailBody = TestData.getMailBodyValue();
 
     @FindBy(xpath = MAIL_RECIPIENT_FIELD)
     private WebElement mailRecipientField;
@@ -77,7 +76,7 @@ public class DraftLetterTemplatePage extends BasePage {
         try {
             WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CAPTCHA_POPUP));
             new Actions(driver).click(captchaInput).pause(25000).build().perform();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("There is a captcha protection");
         }
         return new CommonPage(driver);
@@ -95,18 +94,18 @@ public class DraftLetterTemplatePage extends BasePage {
 
     public void fillInLetterRecipient() {
         mailRecipientField.click();
-        mailRecipientField.sendKeys(MAIL_RECIPIENT_VALUE);
+        mailRecipientField.sendKeys(mailRecipient);
     }
 
     public void fillInLetterSubject() {
         waitForPageToBeLoaded();
         subjectField.click();
-        subjectField.sendKeys(MAIL_SUBJECT_VALUE);
+        subjectField.sendKeys(mailSubject);
     }
 
     public void fillInLetterBody() {
         mailBodyField.click();
-        mailBodyField.sendKeys(MAIL_BODY_VALUE);
+        mailBodyField.sendKeys(mailBody);
     }
 
     @Override
