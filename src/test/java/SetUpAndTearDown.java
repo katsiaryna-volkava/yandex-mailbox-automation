@@ -40,28 +40,4 @@ public class SetUpAndTearDown {
     public void browserClose() {
         driver.quit();
     }
-
-    public CommonPage loginToMailbox() {
-        new HomePage(driver)
-                .proceedToLoginPage()
-                .userEntersLoginName()
-                .userEntersPasswordValue();
-        return new CommonPage(driver);
-    }
-
-    public DraftLetterTemplatePage createDraftMail() {
-        new CommonPage(driver)
-                .openTemplateForWritingNewLetter()
-                .fillInLetterFields()
-                .closeLetterWithoutSaving()
-                .goToDraftsPage()
-                .openDraftLetter();
-        return new DraftLetterTemplatePage(driver);
-    }
-
-    public CommonPage sendLetter() {
-        new DraftLetterTemplatePage(driver)
-                .sendLetter();
-        return new CommonPage(driver);
-    }
 }

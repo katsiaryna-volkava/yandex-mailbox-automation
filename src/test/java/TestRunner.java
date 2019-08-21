@@ -18,24 +18,27 @@ public class TestRunner extends SetUpAndTearDown {
 
     @Test(priority = 1)
     public void userIsLoggedInIntoMailbox() {
-        String actualMailboxName = loginToMailbox()
+        String actualMailboxName = new CommonOperations()
+                .loginToMailbox(driver)
                 .findTheNameOfMailboxYouAreLoggedInto();
         Assert.assertEquals(actualMailboxName, "cdp-automation2");
     }
 
     @Test(priority = 2)
     public void userCanFindUnsavedLetterInDraftsFolder() {
-        loginToMailbox();
-        List<String> actualDraftLetterFields = createDraftMail()
+        new CommonOperations().loginToMailbox(driver);
+        List<String> actualDraftLetterFields = new CommonOperations()
+                .createDraftMail(driver)
                 .findLetterAttributes();
         Assert.assertEquals(actualDraftLetterFields, expectedLetterFields);
     }
 
     @Test(priority = 3)
     public void userCanSendTheLetterSavedAsDraft() throws InterruptedException {
-        loginToMailbox();
-        createDraftMail();
-        String actualSentLetterBody = sendLetter()
+        new CommonOperations().loginToMailbox(driver);
+        new CommonOperations().createDraftMail(driver);
+        String actualSentLetterBody = new CommonOperations()
+                .sendLetterFromDraft(driver)
                 .goToSentMailFolder()
                 .openSentLetter()
                 .checkThatMailBodyIsCorrect();
@@ -44,7 +47,7 @@ public class TestRunner extends SetUpAndTearDown {
 
     @Test(priority = 4)
     public void userIsLoggedOffFromMailbox() {
-        loginToMailbox();
+        new CommonOperations().loginToMailbox(driver);
         boolean isButtonPresent = new CommonPage(driver)
                 .exitFromCurrentMailbox()
                 .checkThatYouHaveLoggedOff();
