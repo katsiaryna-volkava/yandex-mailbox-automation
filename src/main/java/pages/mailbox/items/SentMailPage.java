@@ -20,6 +20,7 @@ public class SentMailPage extends BasePage {
     }
 
     public SentLetterTemplatePage openSentLetter() {
+        resfreshCurrentPage();
         waitForPageToBeLoaded();
         sentLetter.click();
         return new SentLetterTemplatePage(driver);

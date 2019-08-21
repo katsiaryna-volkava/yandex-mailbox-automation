@@ -20,7 +20,7 @@ public class TestRunner extends SetUpAndTearDown {
     public void userIsLoggedInIntoMailbox() {
         String actualMailboxName = loginToMailbox()
                 .findTheNameOfMailboxYouAreLoggedInto();
-        Assert.assertEquals(actualMailboxName, "cdp-automation");
+        Assert.assertEquals(actualMailboxName, "cdp-automation2");
     }
 
     @Test(priority = 2)

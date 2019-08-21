@@ -13,7 +13,7 @@ public class LoginPage extends BasePage {
     private static final String LOGIN_INPUT = "//input[@type='text' and @name='login']";
     private static final String PASSWORD_INPUT = "//input[@type='password' and @name='passwd']";
     private static final String PROCEED_BUTTON = "//button[@type='submit']";
-    private static final String LOGIN_NAME_VALUE = "cdp-automation";
+    private static final String LOGIN_NAME_VALUE = "cdp-automation2";
     private static final String PASSWORD_VALUE = "qwerty1234";
 
     @FindBy(xpath = LOGIN_INPUT)

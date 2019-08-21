@@ -36,10 +36,10 @@ public class SetUpAndTearDown {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void browserClose() {
         driver.quit();
-    }
+    }*/
 
     public CommonPage loginToMailbox() {
         new HomePage(driver)

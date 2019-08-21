@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.letters.templates.DraftLetterTemplatePage;
 import pages.logining.LogOffPage;
@@ -65,15 +66,18 @@ public class CommonPage extends BasePage {
 
     public SentMailPage goToSentMailFolder() {
         sentMailFolder.click();
-        driver.navigate().refresh();
+        resfreshCurrentPage();
         return new SentMailPage(driver);
     }
 
     public LoginPage exitFromCurrentMailbox() {
-        mailboxIndication.click();
-        accountSettings.click();
-        currentAccountButton.click();
-        exitButton.click();
+        new Actions(driver)
+                .click(mailboxIndication)
+                .click(accountSettings)
+                .click(currentAccountButton)
+                .click(exitButton)
+                .build().perform();
+
         return new LoginPage(driver);
     }
 

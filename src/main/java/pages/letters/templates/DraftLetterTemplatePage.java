@@ -64,6 +64,7 @@ public class DraftLetterTemplatePage extends BasePage {
 
     public CommonPage sendLetter() {
         sendLetterButton.click();
+       WaitUtils.sleeping(driver);
         return new CommonPage(driver);
     }
 
