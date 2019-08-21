@@ -3,6 +3,7 @@ package pages.letters.templates;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
@@ -25,6 +26,9 @@ public class DraftLetterTemplatePage extends BasePage {
     private static final String MAIL_RECIPIENT_VALUE = "katsiaryna_volkava@gmail.com";
     private static final String MAIL_SUBJECT_VALUE = "automation task";
     private static final String MAIL_BODY_VALUE = "This is test task for webdriever module.";
+    private static final String CAPTCHA_POPUP = "//div[@class='b-popup__p']]";
+    private static final String CAPTCHA_INPUT_FIELD = "//input[contains(@class,'s-captcha-input')]";
+
 
 
     @FindBy(xpath = MAIL_RECIPIENT_FIELD)
@@ -45,6 +49,12 @@ public class DraftLetterTemplatePage extends BasePage {
     @FindBy(xpath = SEND_LETTER_BUTTON)
     private WebElement sendLetterButton;
 
+    @FindBy(xpath = CAPTCHA_POPUP)
+    private WebElement captchaPopup;
+
+    @FindBy(xpath = CAPTCHA_INPUT_FIELD)
+    private WebElement captchaInput;
+
     public DraftLetterTemplatePage(WebDriver driver) {
         super(driver);
     }
@@ -64,7 +74,12 @@ public class DraftLetterTemplatePage extends BasePage {
 
     public CommonPage sendLetter() {
         sendLetterButton.click();
-       WaitUtils.sleeping(driver);
+        try {
+            WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CAPTCHA_POPUP));
+            new Actions(driver).click(captchaInput).pause(25000).build().perform();
+        } catch(Exception e) {
+            System.out.println("There is a captcha protection");
+        }
         return new CommonPage(driver);
     }
 

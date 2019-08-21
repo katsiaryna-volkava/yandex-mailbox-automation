@@ -9,7 +9,7 @@ public class WaitUtils {
 
     public static void waitUntilVisibilityOfElementLocatedBy(WebDriver driver, By by) {
         Wait wait = new FluentWait(driver).withTimeout(10, TimeUnit.SECONDS)
-                .pollingEvery(1,TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementClickInterceptedException.class)
                 .ignoring(UnhandledAlertException.class);
@@ -25,13 +25,4 @@ public class WaitUtils {
     public static void waitImplicitly(WebDriver driver) {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
-
-    public static void sleeping (WebDriver driver) {
-        try {
-            Thread.sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
