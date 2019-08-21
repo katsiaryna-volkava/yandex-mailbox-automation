@@ -32,4 +32,9 @@ public class SentLetterTemplatePage extends BasePage {
     protected void waitForPageToBeLoaded() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(FORWARD_BUTTON));
     }
+
+    @Override
+    protected void waitForElementToBeLoaded(WebElement element) {
+
+    }
 }

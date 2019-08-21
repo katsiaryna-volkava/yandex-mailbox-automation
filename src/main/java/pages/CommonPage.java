@@ -70,12 +70,15 @@ public class CommonPage extends BasePage {
     }
 
     public LoginPage exitFromCurrentMailbox() {
-        new Actions(driver)
-                .click(mailboxIndication)
-                .click(accountSettings)
-                .click(currentAccountButton)
-                .click(exitButton)
-                .build().perform();
+        Actions action = new Actions(driver);
+        waitForPageToBeLoaded();
+        action.click(mailboxIndication).perform();
+        waitForElementToBeLoaded(accountSettings);
+        action.click(accountSettings).perform();
+        waitForElementToBeLoaded(currentAccountButton);
+        action.click(currentAccountButton).perform();
+        waitForElementToBeLoaded(exitButton);
+        action.click(exitButton).build().perform();
 
         return new LoginPage(driver);
     }
@@ -83,5 +86,10 @@ public class CommonPage extends BasePage {
     @Override
     protected void waitForPageToBeLoaded() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(MAILBOX_INDICATION));
+    }
+
+    @Override
+    protected void waitForElementToBeLoaded(WebElement element) {
+        WaitUtils.waitUntilVisibilityOfElement(driver, element);
     }
 }

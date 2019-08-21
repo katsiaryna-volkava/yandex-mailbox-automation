@@ -22,6 +22,8 @@ public abstract class BasePage {
 
     protected abstract void waitForPageToBeLoaded();
 
+    protected abstract void waitForElementToBeLoaded(WebElement element);
+
     protected void resfreshCurrentPage() {
         new Actions(driver).sendKeys(Keys.F5).build().perform();
     }
