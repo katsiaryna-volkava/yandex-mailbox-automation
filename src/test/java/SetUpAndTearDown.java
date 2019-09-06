@@ -2,6 +2,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
+
 public class SetUpAndTearDown {
 
     protected WebDriver driver;
@@ -11,8 +16,9 @@ public class SetUpAndTearDown {
     private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
 
     @BeforeMethod
-    public void browserSetup() {
+    public void browserSetup() throws IOException {
         prepareChromeBrowser();
+        setTheGeneralTimeoutFromConsole(driver);
         maximazeBrowser();
         goToLoginPage();
     }
@@ -24,6 +30,12 @@ public class SetUpAndTearDown {
     void prepareChromeBrowser() {
         System.setProperty(CHROME_DRIVER_PROPERTY, GOOGLE_CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
+    }
+
+    public static void setTheGeneralTimeoutFromConsole(WebDriver driver) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int seconds = Integer.parseInt(reader.readLine());
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
     void maximazeBrowser() {
