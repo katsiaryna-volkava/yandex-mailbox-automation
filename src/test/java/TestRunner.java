@@ -21,7 +21,7 @@ public class TestRunner extends SetUpAndTearDown {
         EXPECTED_LETTER_FIELDS.add(EXPECTED_LETTER_BODY);
     }
 
-    public TestRunner() throws IOException {
+    public TestRunner() {
     }
 
     @Test(priority = 1)

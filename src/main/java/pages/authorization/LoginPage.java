@@ -12,7 +12,7 @@ import utils.WaitUtils;
 public class LoginPage extends BasePage {
 
     private static final String LOGIN_INPUT = "//input[@type='text' and @name='login']";
-    private static final String PASSWORD_INPUT = "//input[@type='password' and @name='passwd']";
+    private static final String PASSWORD_INPUT = "//div[@class='passp-password-field']//input[@type='password' and @name='passwd']";
     private static final String PROCEED_BUTTON = "//button[@type='submit']";
 
     String loginData = TestData.getLoginNameValue();
@@ -48,6 +48,7 @@ public class LoginPage extends BasePage {
 
     public CommonPage userEntersPasswordValue() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
+        WaitUtils.waitUntilClickabilityOfElement(driver, passwordField);
         passwordField.click();
         passwordField.sendKeys(passwordData);
         proceedButton.click();
