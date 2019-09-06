@@ -3,6 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.authorization.HomePage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class TestRunner extends SetUpAndTearDown {
         EXPECTED_LETTER_FIELDS = new ArrayList<>();
         EXPECTED_LETTER_FIELDS.add(EXPECTED_LETTER_SUBJECT);
         EXPECTED_LETTER_FIELDS.add(EXPECTED_LETTER_BODY);
+    }
+
+    public TestRunner() throws IOException {
     }
 
     @Test(priority = 1)
