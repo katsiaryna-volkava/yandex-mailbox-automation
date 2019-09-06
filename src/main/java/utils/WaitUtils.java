@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
 
-
-
     public static void waitUntilVisibilityOfElementLocatedBy(WebDriver driver, By by) {
         Wait wait = new FluentWait(driver).withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)

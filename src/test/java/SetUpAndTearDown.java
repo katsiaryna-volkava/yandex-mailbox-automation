@@ -38,8 +38,8 @@ public class SetUpAndTearDown {
         driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
-    /*@AfterMethod
+    @AfterMethod
     public void browserClose() {
         driver.quit();
-    }*/
+    }
 }

@@ -3,12 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.templates.DraftLetterTemplatePage;
 import pages.authorization.LoginPage;
 import pages.items.DraftsPage;
 import pages.items.SentMailPage;
+import utils.ElementActionsUtils;
 import utils.WaitUtils;
 
 public class CommonPage extends BasePage {
@@ -70,16 +70,14 @@ public class CommonPage extends BasePage {
     }
 
     public LoginPage exitFromCurrentMailbox() {
-        Actions action = new Actions(driver);
         waitForPageToBeLoaded();
-        action.click(mailboxIndication).perform();
+        ElementActionsUtils.clickOnElement(driver, mailboxIndication);
         WaitUtils.waitUntilVisibilityOfElement(driver, accountSettings);
-        action.click(accountSettings).perform();
+        ElementActionsUtils.clickOnElement(driver, accountSettings);
         WaitUtils.waitUntilVisibilityOfElement(driver, currentAccountButton);
-        action.click(currentAccountButton).perform();
+        ElementActionsUtils.clickOnElement(driver, currentAccountButton);
         WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
-        action.click(exitButton).build().perform();
-
+        ElementActionsUtils.clickOnElement(driver, exitButton);
         return new LoginPage(driver);
     }
 

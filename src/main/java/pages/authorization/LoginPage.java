@@ -4,9 +4,11 @@ import data.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
+import utils.ElementActionsUtils;
 import utils.WaitUtils;
 
 public class LoginPage extends BasePage {
@@ -39,19 +41,18 @@ public class LoginPage extends BasePage {
 
 
     public LoginPage userEntersLoginName() {
+        Actions action = new Actions(driver);
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
-        loginField.click();
-        loginField.sendKeys(loginData);
-        proceedButton.click();
+        ElementActionsUtils.clickOnElementAndTypeData(driver, loginField, loginData);
+        ElementActionsUtils.clickOnElement(driver, proceedButton);
         return this;
     }
 
     public CommonPage userEntersPasswordValue() {
+        Actions action = new Actions(driver);
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
-        WaitUtils.waitUntilClickabilityOfElement(driver, passwordField);
-        passwordField.click();
-        passwordField.sendKeys(passwordData);
-        proceedButton.click();
+        ElementActionsUtils.clickOnElementAndTypeData(driver, passwordField, passwordData);
+        ElementActionsUtils.clickOnElement(driver, proceedButton);
         return new CommonPage(driver);
     }
 
