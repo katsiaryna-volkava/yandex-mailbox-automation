@@ -22,7 +22,7 @@ public class SentLetterTemplatePage extends BasePage {
         super(driver);
     }
 
-    public String checkThatMailBodyIsCorrect() {
+    public String getLetterSubject() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(SENT_LETTER_SUBJECT));
         String actualLetterSubject = letterSubject.getText();
         return actualLetterSubject;

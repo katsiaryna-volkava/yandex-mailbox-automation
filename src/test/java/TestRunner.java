@@ -56,7 +56,7 @@ public class TestRunner extends SetUpAndTearDown {
                 .sendLetter()
                 .goToSentMailFolder()
                 .openSentLetter()
-                .checkThatMailBodyIsCorrect();
+                .getLetterSubject();
         Assert.assertEquals(actualSentLetterBody, EXPECTED_LETTER_SUBJECT);
     }
 
