@@ -24,9 +24,4 @@ public class HomePage extends BasePage {
     @Override
     protected void waitForPageToBeLoaded() {
     }
-
-    @Override
-    protected void waitForElementToBeLoaded(WebElement element) {
-
-    }
 }

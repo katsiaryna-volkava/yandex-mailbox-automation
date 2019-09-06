@@ -30,9 +30,4 @@ public class DraftsPage extends BasePage {
     protected void waitForPageToBeLoaded() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(DRAFT_LETTER));
     }
-
-    @Override
-    protected void waitForElementToBeLoaded(WebElement element) {
-
-    }
 }

@@ -112,9 +112,4 @@ public class DraftLetterTemplatePage extends BasePage {
     protected void waitForPageToBeLoaded() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CLOSE_BUTTON));
     }
-
-    @Override
-    protected void waitForElementToBeLoaded(WebElement element) {
-
-    }
 }

@@ -73,11 +73,11 @@ public class CommonPage extends BasePage {
         Actions action = new Actions(driver);
         waitForPageToBeLoaded();
         action.click(mailboxIndication).perform();
-        waitForElementToBeLoaded(accountSettings);
+        WaitUtils.waitUntilVisibilityOfElement(driver, accountSettings);
         action.click(accountSettings).perform();
-        waitForElementToBeLoaded(currentAccountButton);
+        WaitUtils.waitUntilVisibilityOfElement(driver, currentAccountButton);
         action.click(currentAccountButton).perform();
-        waitForElementToBeLoaded(exitButton);
+        WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
         action.click(exitButton).build().perform();
 
         return new LoginPage(driver);
@@ -88,8 +88,4 @@ public class CommonPage extends BasePage {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(MAILBOX_INDICATION));
     }
 
-    @Override
-    protected void waitForElementToBeLoaded(WebElement element) {
-        WaitUtils.waitUntilVisibilityOfElement(driver, element);
-    }
 }

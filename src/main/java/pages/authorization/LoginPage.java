@@ -62,9 +62,4 @@ public class LoginPage extends BasePage {
     protected void waitForPageToBeLoaded() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PROCEED_BUTTON));
     }
-
-    @Override
-    protected void waitForElementToBeLoaded(WebElement element) {
-
-    }
 }
