@@ -43,16 +43,18 @@ public class LoginPage extends BasePage {
     public LoginPage userEntersLoginName() {
         Actions action = new Actions(driver);
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
+        ElementActionsUtils.highlightElement(driver, By.xpath(LOGIN_INPUT));
         ElementActionsUtils.clickOnElementAndTypeData(driver, loginField, loginData);
-        ElementActionsUtils.clickOnElement(driver, proceedButton);
+        ElementActionsUtils.clickElementJs(driver, proceedButton);
         return this;
     }
 
     public CommonPage userEntersPasswordValue() {
         Actions action = new Actions(driver);
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
+        ElementActionsUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
         ElementActionsUtils.clickOnElementAndTypeData(driver, passwordField, passwordData);
-        ElementActionsUtils.clickOnElement(driver, proceedButton);
+        ElementActionsUtils.clickElementJs(driver, proceedButton);
         return new CommonPage(driver);
     }
 
