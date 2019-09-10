@@ -4,11 +4,13 @@ import models.Letter;
 
 public class LetterFieldsFiller {
 
-    private static final String MAIL_RECIPIENT_VALUE = "katsiaryna_volkava@gmail.com";
-    private static final String MAIL_SUBJECT_VALUE = "automation task";
-    private static final String MAIL_BODY_VALUE = "This is test task for webdriever module.";
+    private static final String TESTDATA_MAIL_RECIPIENT_VALUE = "testdata.letter.recipient";
+    private static final String TESTDATA_MAIL_SUBJECT_VALUE = "testdata.letter.subject";
+    private static final String TESTDATA_MAIL_BODY_VALUE = "testdata.letter.body";
 
     public static Letter withDataFromProperty() {
-        return new Letter(MAIL_RECIPIENT_VALUE, MAIL_SUBJECT_VALUE, MAIL_BODY_VALUE);
+        return new Letter(TestDataReader.getTestData(TESTDATA_MAIL_RECIPIENT_VALUE),
+                TestDataReader.getTestData(TESTDATA_MAIL_SUBJECT_VALUE),
+                TestDataReader.getTestData(TESTDATA_MAIL_BODY_VALUE));
     }
 }

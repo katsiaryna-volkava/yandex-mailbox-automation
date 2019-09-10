@@ -4,10 +4,11 @@ import models.Mailbox;
 
 public class MailboxCreator {
 
-    public static final String MAILBOX_NAME = "cdp-automation2";
-    public static final String MAILBOX_PASSWORD = "qwerty1234";
+    public static final String TESTDATA_MAILBOX_NAME = "testdata.mailbox.name";
+    public static final String TESTDATA_MAILBOX_PASSWORD = "testdata.mailbox.password";
 
     public static Mailbox withCredentialsFromProperty(){
-        return new Mailbox(MAILBOX_NAME, MAILBOX_PASSWORD);
+        return new Mailbox(TestDataReader.getTestData(TESTDATA_MAILBOX_NAME),
+                TestDataReader.getTestData(TESTDATA_MAILBOX_PASSWORD));
     }
 }
