@@ -21,24 +21,12 @@ public class Letter {
         return mailRecipint;
     }
 
-    public void setMailRecipint(String mailRecipint) {
-        this.mailRecipint = mailRecipint;
-    }
-
     public String getMailSubject() {
         return mailSubject;
     }
 
-    public void setMailSubject(String mailSubject) {
-        this.mailSubject = mailSubject;
-    }
-
     public String getMailBody() {
         return mailBody;
-    }
-
-    public void setMailBody(String mailBody) {
-        this.mailBody = mailBody;
     }
 
     public ArrayList<String> getLetterSubjectAndBody() {

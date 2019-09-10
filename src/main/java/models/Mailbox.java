@@ -16,16 +16,8 @@ public class Mailbox {
         return mailboxName;
     }
 
-    public void setMailboxName(String mailboxName) {
-        this.mailboxName = mailboxName;
-    }
-
     public String getMailboxPassword() {
         return mailboxPassword;
-    }
-
-    public void setMailboxPassword(String mailboxPassword) {
-        this.mailboxPassword = mailboxPassword;
     }
 
     @Override
