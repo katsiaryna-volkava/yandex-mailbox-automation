@@ -1,6 +1,6 @@
 package pages.templates;
 
-import data.TestData;
+import models.Letter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
+import service.LetterFieldsFiller;
 import utils.WaitUtils;
 
 import java.util.ArrayList;
@@ -25,10 +26,6 @@ public class DraftLetterTemplatePage extends BasePage {
     private static final String SEND_LETTER_BUTTON = "//button[contains(@class, '_init js-send-button')]";
     private static final String CAPTCHA_POPUP = "//div[@class='b-popup__p']]";
     private static final String CAPTCHA_INPUT_FIELD = "//input[contains(@class,'s-captcha-input')]";
-
-    private String mailSubject = TestData.getMailSubjectValue();
-    private String mailRecipient = TestData.getMailRecipientValue();
-    private String mailBody = TestData.getMailBodyValue();
 
     @FindBy(xpath = MAIL_RECIPIENT_FIELD)
     private WebElement mailRecipientField;
@@ -93,19 +90,22 @@ public class DraftLetterTemplatePage extends BasePage {
     }
 
     public void fillInLetterRecipient() {
+        Letter letter = LetterFieldsFiller.withDataFromProperty();
         mailRecipientField.click();
-        mailRecipientField.sendKeys(mailRecipient);
+        mailRecipientField.sendKeys(letter.getMailRecipint());
     }
 
     public void fillInLetterSubject() {
+        Letter letter = LetterFieldsFiller.withDataFromProperty();
         waitForPageToBeLoaded();
         subjectField.click();
-        subjectField.sendKeys(mailSubject);
+        subjectField.sendKeys(letter.getMailSubject());
     }
 
     public void fillInLetterBody() {
+        Letter letter = LetterFieldsFiller.withDataFromProperty();
         mailBodyField.click();
-        mailBodyField.sendKeys(mailBody);
+        mailBodyField.sendKeys(letter.getMailBody());
     }
 
     @Override

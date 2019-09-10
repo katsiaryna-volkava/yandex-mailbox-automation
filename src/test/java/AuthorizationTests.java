@@ -1,11 +1,9 @@
-import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.authorization.HomePage;
+import service.MailboxCreator;
 
 public class AuthorizationTests extends CommonConditions {
-
-    private final String EXPECTED_MAILBOX_NAME = TestData.getLoginNameValue();
 
     @Test(priority = 1)
     public void userIsLoggedInIntoMailbox() {
@@ -13,7 +11,7 @@ public class AuthorizationTests extends CommonConditions {
                 .proceedToLoginPage()
                 .enterCredentials()
                 .findTheNameOfMailboxYouAreLoggedInto();
-        Assert.assertEquals(actualMailboxName, EXPECTED_MAILBOX_NAME);
+        Assert.assertEquals(actualMailboxName, MailboxCreator.withCredentialsFromProperty().getMailboxName());
     }
 
     @Test(priority = 4)
