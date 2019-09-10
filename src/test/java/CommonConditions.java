@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class SetUpAndTearDown {
+public class CommonConditions {
 
     protected WebDriver driver;
 
