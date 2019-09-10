@@ -8,7 +8,7 @@ import pages.templates.DraftLetterTemplatePage;
 import pages.authorization.LoginPage;
 import pages.items.DraftsPage;
 import pages.items.SentMailPage;
-import utils.ElementActionsUtils;
+import utils.ElementUtils;
 import utils.WaitUtils;
 
 public class CommonPage extends BasePage {
@@ -71,13 +71,13 @@ public class CommonPage extends BasePage {
 
     public LoginPage exitFromCurrentMailbox() {
         waitForPageToBeLoaded();
-        ElementActionsUtils.clickOnElement(driver, mailboxIndication);
+        ElementUtils.clickOnElement(driver, mailboxIndication);
         WaitUtils.waitUntilVisibilityOfElement(driver, accountSettings);
-        ElementActionsUtils.clickOnElement(driver, accountSettings);
+        ElementUtils.clickOnElement(driver, accountSettings);
         WaitUtils.waitUntilVisibilityOfElement(driver, currentAccountButton);
-        ElementActionsUtils.clickOnElement(driver, currentAccountButton);
+        ElementUtils.clickOnElement(driver, currentAccountButton);
         WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
-        ElementActionsUtils.clickOnElement(driver, exitButton);
+        ElementUtils.clickOnElement(driver, exitButton);
         return new LoginPage(driver);
     }
 

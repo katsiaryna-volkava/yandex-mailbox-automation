@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class ElementActionsUtils {
+public class ElementUtils {
 
     public static void clickOnElementAndTypeData(WebDriver driver, WebElement element, String data) {
         Actions action = new Actions(driver);

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.templates.DraftLetterTemplatePage;
-import utils.ElementActionsUtils;
+import utils.ElementUtils;
 import utils.WaitUtils;
 
 public class DraftsPage extends BasePage {
@@ -22,7 +22,7 @@ public class DraftsPage extends BasePage {
 
     public DraftLetterTemplatePage openDraftLetter() {
         waitForPageToBeLoaded();
-        ElementActionsUtils.clickOnElement(driver, draftLetter);
+        ElementUtils.clickOnElement(driver, draftLetter);
       //  new Actions(driver).moveToElement(draftLetter).click(draftLetter).build().perform();
         return new DraftLetterTemplatePage(driver);
     }

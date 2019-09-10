@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
 import service.MailboxCreator;
-import utils.ElementActionsUtils;
+import utils.ElementUtils;
 import utils.WaitUtils;
 
 public class LoginPage extends BasePage {
@@ -40,18 +40,18 @@ public class LoginPage extends BasePage {
     public LoginPage userEntersLoginName() {
         Mailbox mailbox = MailboxCreator.withCredentialsFromProperty();
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
-        ElementActionsUtils.highlightElement(driver, By.xpath(LOGIN_INPUT));
-        ElementActionsUtils.clickOnElementAndTypeData(driver, loginField, mailbox.getMailboxName());
-        ElementActionsUtils.clickElementJs(driver, proceedButton);
+        ElementUtils.highlightElement(driver, By.xpath(LOGIN_INPUT));
+        ElementUtils.clickOnElementAndTypeData(driver, loginField, mailbox.getMailboxName());
+        ElementUtils.clickElementJs(driver, proceedButton);
         return this;
     }
 
     public CommonPage userEntersPasswordValue() {
         Mailbox mailbox = MailboxCreator.withCredentialsFromProperty();
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
-        ElementActionsUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
-        ElementActionsUtils.clickOnElementAndTypeData(driver, passwordField, mailbox.getMailboxPassword());
-        ElementActionsUtils.clickElementJs(driver, proceedButton);
+        ElementUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
+        ElementUtils.clickOnElementAndTypeData(driver, passwordField, mailbox.getMailboxPassword());
+        ElementUtils.clickElementJs(driver, proceedButton);
         return new CommonPage(driver);
     }
 
