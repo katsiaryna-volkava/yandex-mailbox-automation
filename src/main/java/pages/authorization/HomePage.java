@@ -18,6 +18,7 @@ public class HomePage extends BasePage {
 
     public LoginPage proceedToLoginPage() {
         loginButton.click();
+        logger.info("Login page was opened");
         return new LoginPage(driver);
     }
 

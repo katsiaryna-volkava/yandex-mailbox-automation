@@ -23,7 +23,7 @@ public class DraftsPage extends BasePage {
     public DraftLetterTemplatePage openDraftLetter() {
         waitForPageToBeLoaded();
         ElementUtils.clickOnElement(driver, draftLetter);
-      //  new Actions(driver).moveToElement(draftLetter).click(draftLetter).build().perform();
+        logger.info("Draft letter if opened");
         return new DraftLetterTemplatePage(driver);
     }
 

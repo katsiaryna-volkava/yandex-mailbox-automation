@@ -78,6 +78,7 @@ public class CommonPage extends BasePage {
         ElementUtils.clickOnElement(driver, currentAccountButton);
         WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
         ElementUtils.clickOnElement(driver, exitButton);
+        logger.info("Log out was performed");
         return new LoginPage(driver);
     }
 

@@ -1,6 +1,8 @@
 package pages.authorization;
 
 import models.Mailbox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +35,7 @@ public class LoginPage extends BasePage {
     public CommonPage enterCredentials() {
         userEntersLoginName();
         userEntersPasswordValue();
+        logger.info("Login was preformed");
         return new CommonPage(driver);
     }
 

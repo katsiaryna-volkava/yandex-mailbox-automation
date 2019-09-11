@@ -59,6 +59,7 @@ public class DraftLetterTemplatePage extends BasePage {
         fillInLetterSubject();
         fillInLetterRecipient();
         fillInLetterBody();
+        logger.info("Letter is filled in");
         return this;
     }
 
@@ -74,7 +75,7 @@ public class DraftLetterTemplatePage extends BasePage {
             WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CAPTCHA_POPUP));
             new Actions(driver).click(captchaInput).pause(25000).build().perform();
         } catch (Exception e) {
-            System.out.println("There is a captcha protection");
+            logger.info("There is a captcha protection. Type it manually");
         }
         return new CommonPage(driver);
     }
