@@ -2,9 +2,11 @@ import driver.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners({TestListener.class})
 public class CommonConditions {
 
     protected WebDriver driver;
@@ -23,7 +25,6 @@ public class CommonConditions {
     void goToLoginPage() {
         driver.get(LOGIN_PAGE_URL);
     }
-
 
     void maximazeBrowser() {
         driver.manage().window().maximize();
