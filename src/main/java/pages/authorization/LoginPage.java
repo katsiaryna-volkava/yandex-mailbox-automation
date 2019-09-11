@@ -1,15 +1,12 @@
 package pages.authorization;
 
 import models.Mailbox;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
-import service.MailboxCreator;
 import utils.ElementUtils;
 import utils.WaitUtils;
 
@@ -32,28 +29,26 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public CommonPage enterCredentials() {
-        userEntersLoginName();
-        userEntersPasswordValue();
+    public CommonPage enterCredentials(Mailbox mailbox) {
+        userEntersLoginName(mailbox.getMailboxName());
+        userEntersPasswordValue(mailbox.getMailboxPassword());
         logger.info("Login was preformed");
         return new CommonPage(driver);
     }
 
 
-    public LoginPage userEntersLoginName() {
-        Mailbox mailbox = MailboxCreator.withCredentialsFromProperty();
+    public LoginPage userEntersLoginName(String mailboxName) {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
         ElementUtils.highlightElement(driver, By.xpath(LOGIN_INPUT));
-        ElementUtils.clickOnElementAndTypeData(driver, loginField, mailbox.getMailboxName());
+        ElementUtils.clickOnElementAndTypeData(driver, loginField, mailboxName);
         ElementUtils.clickElementJs(driver, proceedButton);
         return this;
     }
 
-    public CommonPage userEntersPasswordValue() {
-        Mailbox mailbox = MailboxCreator.withCredentialsFromProperty();
+    public CommonPage userEntersPasswordValue(String mailboxPassword) {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
         ElementUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
-        ElementUtils.clickOnElementAndTypeData(driver, passwordField, mailbox.getMailboxPassword());
+        ElementUtils.clickOnElementAndTypeData(driver, passwordField, mailboxPassword);
         ElementUtils.clickElementJs(driver, proceedButton);
         return new CommonPage(driver);
     }

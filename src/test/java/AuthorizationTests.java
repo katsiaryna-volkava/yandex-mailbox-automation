@@ -1,3 +1,4 @@
+import models.Mailbox;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.authorization.HomePage;
@@ -9,7 +10,7 @@ public class AuthorizationTests extends CommonConditions {
     public void userIsLoggedInIntoMailbox() {
         String actualMailboxName = new HomePage(driver)
                 .proceedToLoginPage()
-                .enterCredentials()
+                .enterCredentials(testMailbox)
                 .findTheNameOfMailboxYouAreLoggedInto();
         Assert.assertEquals(actualMailboxName, MailboxCreator.withCredentialsFromProperty().getMailboxName());
     }
@@ -18,9 +19,10 @@ public class AuthorizationTests extends CommonConditions {
     public void userIsLoggedOffFromMailbox() {
         boolean isButtonPresent = new HomePage(driver)
                 .proceedToLoginPage()
-                .enterCredentials()
+                .enterCredentials(testMailbox)
                 .exitFromCurrentMailbox()
                 .checkThatYouHaveLoggedOff();
         Assert.assertTrue(isButtonPresent);
     }
 }
+

@@ -1,7 +1,9 @@
 import driver.DriverSingleton;
+import models.Mailbox;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import service.MailboxCreator;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class CommonConditions {
 
     protected WebDriver driver;
+    protected Mailbox testMailbox = MailboxCreator.withCredentialsFromProperty();
 
     private static final String LOGIN_PAGE_URL = "https://mail.yandex.by";
 

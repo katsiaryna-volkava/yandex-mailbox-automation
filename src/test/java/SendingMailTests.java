@@ -11,7 +11,7 @@ public class SendingMailTests extends CommonConditions {
     public void userCanFindUnsavedLetterInDraftsFolder() {
         List<String> actualDraftLetterFields = new HomePage(driver)
                 .proceedToLoginPage()
-                .enterCredentials()
+                .enterCredentials(testMailbox)
                 .openTemplateForWritingNewLetter()
                 .fillInLetterFields()
                 .closeLetterWithoutSaving()
@@ -25,7 +25,7 @@ public class SendingMailTests extends CommonConditions {
     public void userCanSendTheLetterSavedAsDraft() {
         String actualSentLetterBody = new HomePage(driver)
                 .proceedToLoginPage()
-                .enterCredentials()
+                .enterCredentials(testMailbox)
                 .openTemplateForWritingNewLetter()
                 .fillInLetterFields()
                 .closeLetterWithoutSaving()
