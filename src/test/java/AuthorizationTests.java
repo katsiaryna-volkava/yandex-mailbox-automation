@@ -12,7 +12,7 @@ public class AuthorizationTests extends CommonConditions {
                 .proceedToLoginPage()
                 .enterCredentials(testMailbox)
                 .findTheNameOfMailboxYouAreLoggedInto();
-        Assert.assertEquals(actualMailboxName, MailboxCreator.withCredentialsFromProperty().getMailboxName());
+        Assert.assertEquals(actualMailboxName, testMailbox.getMailboxName());
     }
 
     @Test(priority = 4)
