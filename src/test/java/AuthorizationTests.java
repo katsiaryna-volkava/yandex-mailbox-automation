@@ -1,8 +1,6 @@
-import models.Mailbox;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.authorization.HomePage;
-import service.MailboxCreator;
 
 public class AuthorizationTests extends CommonConditions {
 

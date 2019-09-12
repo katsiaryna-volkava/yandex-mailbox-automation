@@ -1,7 +1,6 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.authorization.HomePage;
-import service.LetterFieldsFiller;
 
 import java.util.List;
 

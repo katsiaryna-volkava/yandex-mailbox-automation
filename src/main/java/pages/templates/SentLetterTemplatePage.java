@@ -24,8 +24,7 @@ public class SentLetterTemplatePage extends BasePage {
 
     public String getLetterSubject() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(SENT_LETTER_SUBJECT));
-        String actualLetterSubject = letterSubject.getText();
-        return actualLetterSubject;
+        return letterSubject.getText();
     }
 
     @Override
