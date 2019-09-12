@@ -2,7 +2,6 @@ import driver.DriverSingleton;
 import models.Letter;
 import models.Mailbox;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import service.LetterFieldsFiller;
 import service.MailboxCreator;
@@ -21,10 +20,9 @@ public class CommonConditions {
 
     @BeforeMethod
     public void browserSetup() {
-        driver = DriverSingleton.getDriver();
+        setUpDriver();
         maximazeBrowser();
-        String timeout = System.getProperty("Timeout");
-        waitImplicitly(driver, Integer.valueOf(timeout));
+        setUpTimeout(driver);
         goToLoginPage();
     }
 
@@ -32,12 +30,17 @@ public class CommonConditions {
         driver.get(LOGIN_PAGE_URL);
     }
 
+    void setUpDriver() {
+        driver = DriverSingleton.getDriver();
+    }
+
     void maximazeBrowser() {
         driver.manage().window().maximize();
     }
 
-    public static void waitImplicitly(WebDriver driver, Integer seconds) {
-        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    public static void setUpTimeout(WebDriver driver) {
+        int timeout = Integer.valueOf(System.getProperty("Timeout"));
+        driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
     }
 
     @AfterMethod
