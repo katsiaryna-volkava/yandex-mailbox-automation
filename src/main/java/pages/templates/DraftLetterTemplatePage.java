@@ -55,10 +55,10 @@ public class DraftLetterTemplatePage extends BasePage {
         super(driver);
     }
 
-    public DraftLetterTemplatePage fillInLetterFields() {
-        fillInLetterSubject();
-        fillInLetterRecipient();
-        fillInLetterBody();
+    public DraftLetterTemplatePage fillInLetterFields(Letter letter) {
+        fillInLetterSubject(letter.getMailSubject());
+        fillInLetterRecipient(letter.getMailRecipint());
+        fillInLetterBody(letter.getMailBody());
         logger.info("Letter is filled in");
         return this;
     }
@@ -90,23 +90,20 @@ public class DraftLetterTemplatePage extends BasePage {
         return letterAttributes;
     }
 
-    public void fillInLetterRecipient() {
-        Letter letter = LetterFieldsFiller.withDataFromProperty();
+    public void fillInLetterRecipient(String letterRecipient) {
         mailRecipientField.click();
-        mailRecipientField.sendKeys(letter.getMailRecipint());
+        mailRecipientField.sendKeys(letterRecipient);
     }
 
-    public void fillInLetterSubject() {
-        Letter letter = LetterFieldsFiller.withDataFromProperty();
+    public void fillInLetterSubject(String letterSubject) {
         waitForPageToBeLoaded();
         subjectField.click();
-        subjectField.sendKeys(letter.getMailSubject());
+        subjectField.sendKeys(letterSubject);
     }
 
-    public void fillInLetterBody() {
-        Letter letter = LetterFieldsFiller.withDataFromProperty();
+    public void fillInLetterBody(String letterBody) {
         mailBodyField.click();
-        mailBodyField.sendKeys(letter.getMailBody());
+        mailBodyField.sendKeys(letterBody);
     }
 
     @Override
