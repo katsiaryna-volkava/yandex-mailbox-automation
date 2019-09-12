@@ -59,7 +59,7 @@ public class DraftLetterTemplatePage extends BasePage {
         fillInLetterSubject(letter.getMailSubject());
         fillInLetterRecipient(letter.getMailRecipint());
         fillInLetterBody(letter.getMailBody());
-        logger.info("Letter is filled in");
+        logger.info("Letter fields were filled in");
         return this;
     }
 

@@ -18,12 +18,12 @@ public class SendingMailTests extends CommonConditions {
                 .goToDraftsPage()
                 .openDraftLetter()
                 .findLetterAttributes();
-        Assert.assertEquals(actualDraftLetterFields, LetterFieldsFiller.withDataFromProperty().getLetterSubjectAndBody());
+        Assert.assertEquals(actualDraftLetterFields, testLetter.getLetterSubjectAndBody());
     }
 
     @Test(priority = 3)
     public void userCanSendTheLetterSavedAsDraft() {
-        String actualSentLetterBody = new HomePage(driver)
+        String actualSentLetterSubject = new HomePage(driver)
                 .proceedToLoginPage()
                 .enterCredentials(testMailbox)
                 .openTemplateForWritingNewLetter()
@@ -35,6 +35,6 @@ public class SendingMailTests extends CommonConditions {
                 .goToSentMailFolder()
                 .openSentLetter()
                 .getLetterSubject();
-        Assert.assertEquals(actualSentLetterBody, LetterFieldsFiller.withDataFromProperty().getMailBody());
+        Assert.assertEquals(actualSentLetterSubject, testLetter.getMailSubject());
     }
 }

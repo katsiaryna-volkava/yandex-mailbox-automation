@@ -6,7 +6,7 @@ import service.MailboxCreator;
 
 public class AuthorizationTests extends CommonConditions {
 
-    @Test(priority = 1)
+    @Test(testName = "Login to mailbox", priority = 1)
     public void userIsLoggedInIntoMailbox() {
         String actualMailboxName = new HomePage(driver)
                 .proceedToLoginPage()
@@ -25,4 +25,3 @@ public class AuthorizationTests extends CommonConditions {
         Assert.assertTrue(isButtonPresent);
     }
 }
-

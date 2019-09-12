@@ -32,7 +32,7 @@ public class LoginPage extends BasePage {
     public CommonPage enterCredentials(Mailbox mailbox) {
         userEntersLoginName(mailbox.getMailboxName());
         userEntersPasswordValue(mailbox.getMailboxPassword());
-        logger.info("Login was preformed");
+        logger.info("Login was performed");
         return new CommonPage(driver);
     }
 

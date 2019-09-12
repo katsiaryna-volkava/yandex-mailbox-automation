@@ -23,7 +23,7 @@ public class SentMailPage extends BasePage {
         resfreshCurrentPage();
         waitForPageToBeLoaded();
         sentLetter.click();
-        logger.info("Letter is sent");
+        logger.info("Letter was sent");
         return new SentLetterTemplatePage(driver);
     }
 
