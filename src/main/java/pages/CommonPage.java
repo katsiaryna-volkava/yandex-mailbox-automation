@@ -4,11 +4,13 @@ import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Condition.appears;
 
+import models.Mailbox;
 import org.openqa.selenium.By;
 import pages.templates.DraftLetterTemplatePage;
 import pages.authorization.LoginPage;
 import pages.items.DraftsPage;
 import pages.items.SentMailPage;
+import service.MailboxCreator;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.refresh;
@@ -29,7 +31,7 @@ public class CommonPage extends BasePage {
     public void checkTheLoginCorrectness() {
         $(By.xpath(MAILBOX_INDICATION))
                 .shouldBe(visible)
-                .shouldHave(text("cdp-automation2"));
+                .shouldHave(text(MailboxCreator.withCredentialsFromProperty().getMailboxName()));
     }
 
     public DraftLetterTemplatePage openTemplateForWritingNewLetter() {
