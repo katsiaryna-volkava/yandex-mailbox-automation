@@ -2,17 +2,15 @@ package pages.templates;
 
 import models.Letter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
-import service.LetterFieldsFiller;
-import utils.WaitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.disappears;
+import static com.codeborne.selenide.Selenide.*;
 
 public class DraftLetterTemplatePage extends BasePage {
 
@@ -27,87 +25,58 @@ public class DraftLetterTemplatePage extends BasePage {
     private static final String CAPTCHA_POPUP = "//div[@class='b-popup__p']]";
     private static final String CAPTCHA_INPUT_FIELD = "//input[contains(@class,'s-captcha-input')]";
 
-    @FindBy(xpath = MAIL_RECIPIENT_FIELD)
-    private WebElement mailRecipientField;
-
-    @FindBy(xpath = SUBJECT_FIELD)
-    private WebElement subjectField;
-
-    @FindBy(xpath = MAIL_BODY_FIELD)
-    private WebElement mailBodyField;
-
-    @FindBy(xpath = CLOSE_BUTTON)
-    private WebElement closeButton;
-
-    @FindBy(xpath = CLOSE_CONFIRMATION_BUTTON)
-    private WebElement closeConfirmButton;
-
-    @FindBy(xpath = SEND_LETTER_BUTTON)
-    private WebElement sendLetterButton;
-
-    @FindBy(xpath = CAPTCHA_POPUP)
-    private WebElement captchaPopup;
-
-    @FindBy(xpath = CAPTCHA_INPUT_FIELD)
-    private WebElement captchaInput;
-
-    public DraftLetterTemplatePage(WebDriver driver) {
-        super(driver);
-    }
-
     public DraftLetterTemplatePage fillInLetterFields(Letter letter) {
         fillInLetterSubject(letter.getMailSubject());
         fillInLetterRecipient(letter.getMailRecipint());
         fillInLetterBody(letter.getMailBody());
-        logger.info("Letter fields were filled in");
+        //   logger.info("Letter fields were filled in");
         return this;
     }
 
     public CommonPage closeLetterWithoutSaving() {
-        closeButton.click();
-        closeConfirmButton.click();
-        return new CommonPage(driver);
+        $(By.xpath(CLOSE_BUTTON)).click();
+        $(By.xpath(CLOSE_CONFIRMATION_BUTTON)).click();
+        return new CommonPage();
     }
 
     public CommonPage sendLetter() {
-        sendLetterButton.click();
+        $(By.xpath(SEND_LETTER_BUTTON)).click();
+
         try {
-            WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CAPTCHA_POPUP));
-            new Actions(driver).click(captchaInput).pause(25000).build().perform();
+            $(By.xpath(CAPTCHA_POPUP)).waitUntil(disappears, 10000);
         } catch (Exception e) {
-            logger.info("There is a captcha protection. Type it manually");
+            //  logger.info("There is a captcha protection. Type it manually");
         }
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
     public List<String> findLetterAttributes() {
         letterAttributes = new ArrayList<>();
-        String actualSubjectValue = subjectField.getAttribute("value");
+        String actualSubjectValue = $(By.xpath(SUBJECT_FIELD)).getAttribute("value");
         letterAttributes.add(actualSubjectValue);
-
-        String actualBodyValue = mailBodyField.getText();
+        String actualBodyValue = $(By.xpath(MAIL_BODY_FIELD)).getText();
         letterAttributes.add(actualBodyValue);
         return letterAttributes;
     }
 
     public void fillInLetterRecipient(String letterRecipient) {
-        mailRecipientField.click();
-        mailRecipientField.sendKeys(letterRecipient);
+        $(By.xpath(MAIL_RECIPIENT_FIELD)).click();
+        $(By.xpath(MAIL_RECIPIENT_FIELD)).sendKeys(letterRecipient);
     }
 
     public void fillInLetterSubject(String letterSubject) {
         waitForPageToBeLoaded();
-        subjectField.click();
-        subjectField.sendKeys(letterSubject);
+        $(By.xpath(SUBJECT_FIELD)).click();
+        $(By.xpath(SUBJECT_FIELD)).sendKeys(letterSubject);
     }
 
     public void fillInLetterBody(String letterBody) {
-        mailBodyField.click();
-        mailBodyField.sendKeys(letterBody);
+        $(By.xpath(MAIL_BODY_FIELD)).click();
+        $(By.xpath(MAIL_BODY_FIELD)).sendKeys(letterBody);
     }
 
     @Override
     protected void waitForPageToBeLoaded() {
-        WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(CLOSE_BUTTON));
+        $(By.xpath(CLOSE_BUTTON)).waitUntil(appears, 20000);
     }
 }

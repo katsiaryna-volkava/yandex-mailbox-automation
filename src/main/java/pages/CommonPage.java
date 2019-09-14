@@ -1,15 +1,19 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+
+import static com.codeborne.selenide.Condition.appears;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import pages.templates.DraftLetterTemplatePage;
 import pages.authorization.LoginPage;
 import pages.items.DraftsPage;
 import pages.items.SentMailPage;
-import utils.ElementUtils;
-import utils.WaitUtils;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
 public class CommonPage extends BasePage {
 
@@ -22,69 +26,43 @@ public class CommonPage extends BasePage {
     private static final String EXIT_BUTTON = "//a[contains(@class,'item_action_exit')]";
 
 
-    @FindBy(xpath = MAILBOX_INDICATION)
-    private WebElement mailboxIndication;
-
-    @FindBy(xpath = ACCOUNT_SETTINGS_DROPDOWN_OPTION)
-    private WebElement accountSettings;
-
-    @FindBy(xpath = USER_ACCOUNT_BUTTON)
-    private WebElement currentAccountButton;
-
-    @FindBy(xpath = EXIT_BUTTON)
-    private WebElement exitButton;
-
-    @FindBy(xpath = WRITE_NEW_LETTER_BUTTON)
-    private WebElement writeNewLetterButton;
-
-    @FindBy(xpath = DRAFTS_FOLDER)
-    private WebElement draftsFolder;
-
-    @FindBy(xpath = SENT_MAIL_FOLDER)
-    private WebElement sentMailFolder;
-
-
-    public CommonPage(WebDriver driver) {
-        super(driver);
-    }
-
-    public String findTheNameOfMailboxYouAreLoggedInto() {
-        String mailboxName = mailboxIndication.getText();
-        return mailboxName;
+    public void checkTheLoginCorrectness() {
+        $(By.xpath(MAILBOX_INDICATION))
+                .shouldBe(visible)
+                .shouldHave(text("cdp-automation2"));
     }
 
     public DraftLetterTemplatePage openTemplateForWritingNewLetter() {
-        writeNewLetterButton.click();
-        return new DraftLetterTemplatePage(driver);
+        $(By.xpath(WRITE_NEW_LETTER_BUTTON)).click();
+        return new DraftLetterTemplatePage();
     }
 
     public DraftsPage goToDraftsPage() {
-        draftsFolder.click();
-        return new DraftsPage(driver);
+        $(By.xpath(DRAFTS_FOLDER)).click();
+        return new DraftsPage();
     }
 
     public SentMailPage goToSentMailFolder() {
-        sentMailFolder.click();
-        resfreshCurrentPage();
-        return new SentMailPage(driver);
+        $(By.xpath(SENT_MAIL_FOLDER)).click();
+        refresh();
+        return new SentMailPage();
     }
 
     public LoginPage exitFromCurrentMailbox() {
         waitForPageToBeLoaded();
-        ElementUtils.clickOnElement(driver, mailboxIndication);
-        WaitUtils.waitUntilVisibilityOfElement(driver, accountSettings);
-        ElementUtils.clickOnElement(driver, accountSettings);
-        WaitUtils.waitUntilVisibilityOfElement(driver, currentAccountButton);
-        ElementUtils.clickOnElement(driver, currentAccountButton);
-        WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
-        ElementUtils.clickOnElement(driver, exitButton);
+        $(By.xpath(MAILBOX_INDICATION)).click();
+        $(By.xpath(ACCOUNT_SETTINGS_DROPDOWN_OPTION)).waitUntil(appears, 10000);
+        $(By.xpath(ACCOUNT_SETTINGS_DROPDOWN_OPTION)).click();
+        $(By.xpath(USER_ACCOUNT_BUTTON)).waitUntil(appears, 10000);
+        $(By.xpath(USER_ACCOUNT_BUTTON)).click();
+        $(By.xpath(EXIT_BUTTON)).waitUntil(appears, 10000);
+        $(By.xpath(EXIT_BUTTON)).click();
         logger.info("Log out was performed");
-        return new LoginPage(driver);
+        return new LoginPage();
     }
 
     @Override
     protected void waitForPageToBeLoaded() {
-        WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(MAILBOX_INDICATION));
+        $(By.xpath(MAILBOX_INDICATION)).waitUntil(Condition.appears, 10000);
     }
-
 }

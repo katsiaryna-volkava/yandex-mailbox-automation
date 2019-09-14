@@ -8,7 +8,7 @@ public class SendingMailTests extends CommonConditions {
 
     @Test(priority = 2)
     public void userCanFindUnsavedLetterInDraftsFolder() {
-        List<String> actualDraftLetterFields = new HomePage(driver)
+        List<String> actualDraftLetterFields = new HomePage()
                 .proceedToLoginPage()
                 .enterCredentials(testMailbox)
                 .openTemplateForWritingNewLetter()
@@ -22,7 +22,7 @@ public class SendingMailTests extends CommonConditions {
 
     @Test(priority = 3)
     public void userCanSendTheLetterSavedAsDraft() {
-        String actualSentLetterSubject = new HomePage(driver)
+        String actualSentLetterSubject = new HomePage()
                 .proceedToLoginPage()
                 .enterCredentials(testMailbox)
                 .openTemplateForWritingNewLetter()

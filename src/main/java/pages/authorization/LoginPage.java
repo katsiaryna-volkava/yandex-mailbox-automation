@@ -2,13 +2,12 @@ package pages.authorization;
 
 import models.Mailbox;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import pages.CommonPage;
-import utils.ElementUtils;
-import utils.WaitUtils;
+
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends BasePage {
 
@@ -16,49 +15,31 @@ public class LoginPage extends BasePage {
     private static final String PASSWORD_INPUT = "//div[@class='passp-password-field']//input[@type='password' and @name='passwd']";
     private static final String PROCEED_BUTTON = "//button[@type='submit']";
 
-    @FindBy(xpath = LOGIN_INPUT)
-    private WebElement loginField;
-
-    @FindBy(xpath = PASSWORD_INPUT)
-    private WebElement passwordField;
-
-    @FindBy(xpath = PROCEED_BUTTON)
-    private WebElement proceedButton;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
     public CommonPage enterCredentials(Mailbox mailbox) {
         userEntersLoginName(mailbox.getMailboxName());
         userEntersPasswordValue(mailbox.getMailboxPassword());
         logger.info("Login was performed");
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
-
     public LoginPage userEntersLoginName(String mailboxName) {
-        WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(LOGIN_INPUT));
-        ElementUtils.highlightElement(driver, By.xpath(LOGIN_INPUT));
-        ElementUtils.clickOnElementAndTypeData(driver, loginField, mailboxName);
-        ElementUtils.clickElementJs(driver, proceedButton);
+        $(By.xpath(LOGIN_INPUT)).sendKeys(mailboxName);
+        $(By.xpath(PROCEED_BUTTON)).click();
         return this;
     }
 
     public CommonPage userEntersPasswordValue(String mailboxPassword) {
-        WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PASSWORD_INPUT));
-        ElementUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
-        ElementUtils.clickOnElementAndTypeData(driver, passwordField, mailboxPassword);
-        ElementUtils.clickElementJs(driver, proceedButton);
-        return new CommonPage(driver);
+        $(By.xpath(PASSWORD_INPUT)).sendKeys(mailboxPassword);
+        $(By.xpath(PROCEED_BUTTON)).click();
+        return new CommonPage();
     }
 
-    public boolean checkThatYouHaveLoggedOff() {
-        return passwordField.isDisplayed();
+    public void checkThatYouHaveLoggedOff() {
+        $(By.xpath(PASSWORD_INPUT)).shouldBe(visible);
     }
 
     @Override
     protected void waitForPageToBeLoaded() {
-        WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(PROCEED_BUTTON));
+        $(By.xpath(PROCEED_BUTTON)).waitUntil(appears, 20000);
     }
 }

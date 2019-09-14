@@ -1,4 +1,4 @@
-import driver.DriverSingleton;
+import com.codeborne.selenide.Configuration;
 import models.Letter;
 import models.Mailbox;
 import org.openqa.selenium.WebDriver;
@@ -7,44 +7,35 @@ import service.LetterFieldsFiller;
 import service.MailboxCreator;
 import utils.TestListener;
 
+import static com.codeborne.selenide.Condition.disappears;
+import static com.codeborne.selenide.Configuration.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.addListener;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+
 import java.util.concurrent.TimeUnit;
 
 @Listeners({TestListener.class})
 public class CommonConditions {
 
-    protected WebDriver driver;
+
     protected Mailbox testMailbox = MailboxCreator.withCredentialsFromProperty();
     protected Letter testLetter = LetterFieldsFiller.withDataFromProperty();
 
-    private static final String LOGIN_PAGE_URL = "https://mail.yandex.by";
-
     @BeforeMethod
     public void browserSetup() {
-        setUpDriver();
-        maximazeBrowser();
-        setUpTimeout(driver);
-        goToLoginPage();
-    }
+        browser = "chrome";
+        startMaximized = true;
+        timeout = 30000;
+        baseUrl = "https://mail.yandex.by";
 
-    void goToLoginPage() {
-        driver.get(LOGIN_PAGE_URL);
-    }
-
-    void setUpDriver() {
-        driver = DriverSingleton.getDriver();
-    }
-
-    void maximazeBrowser() {
-        driver.manage().window().maximize();
-    }
-
-    public static void setUpTimeout(WebDriver driver) {
-        int timeout = Integer.valueOf(System.getProperty("Timeout"));
-        driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+        open(baseUrl);
     }
 
     @AfterMethod
     public void browserClose() {
-        DriverSingleton.closeDriver();
+        closeWebDriver();
     }
 }
