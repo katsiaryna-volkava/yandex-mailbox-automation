@@ -1,8 +1,5 @@
 package models;
 
-import service.LetterFieldsFiller;
-
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Letter {
@@ -28,12 +25,6 @@ public class Letter {
     public String getMailBody() {
         return mailBody;
     }
-
-    public ArrayList<String> getLetterSubjectAndBody() {
-        ArrayList<String> letterAttributes = new ArrayList<>();
-        letterAttributes.add(LetterFieldsFiller.withDataFromProperty().getMailSubject());
-        letterAttributes.add(LetterFieldsFiller.withDataFromProperty().getMailBody());
-        return letterAttributes;    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,10 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
-
-import static com.codeborne.selenide.Condition.appears;
-
-import models.Mailbox;
 import org.openqa.selenium.By;
 import pages.templates.DraftLetterTemplatePage;
 import pages.authorization.LoginPage;
@@ -13,9 +8,11 @@ import pages.items.SentMailPage;
 import service.MailboxCreator;
 
 import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Selenide.refresh;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.appears;
 
 public class CommonPage extends BasePage {
 
