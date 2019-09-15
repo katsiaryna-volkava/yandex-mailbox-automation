@@ -30,6 +30,7 @@ public class CommonConditions {
         startMaximized = true;
         timeout = 30000;
         baseUrl = "https://mail.yandex.by";
+        reportsFolder = "target/screenshots";
 
         open(baseUrl);
     }

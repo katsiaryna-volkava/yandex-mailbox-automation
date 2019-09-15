@@ -19,6 +19,7 @@ public class LoginPage extends BasePage {
         userEntersLoginName(mailbox.getMailboxName());
         userEntersPasswordValue(mailbox.getMailboxPassword());
         logger.info("Login was performed");
+
         return new CommonPage();
     }
 

@@ -4,17 +4,12 @@ import models.Letter;
 import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.CommonPage;
+import service.LetterFieldsFiller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.codeborne.selenide.Condition.appears;
-import static com.codeborne.selenide.Condition.disappears;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class DraftLetterTemplatePage extends BasePage {
-
-    List<String> letterAttributes;
 
     private static final String MAIL_RECIPIENT_FIELD = "//div[@class='mail-Compose-Field-Input']/div[@name='to']";
     private static final String SUBJECT_FIELD = "//div[@class='mail-Compose-Field-Input']/input[contains(@name, 'subj')]";
@@ -29,7 +24,7 @@ public class DraftLetterTemplatePage extends BasePage {
         fillInLetterSubject(letter.getMailSubject());
         fillInLetterRecipient(letter.getMailRecipint());
         fillInLetterBody(letter.getMailBody());
-        //   logger.info("Letter fields were filled in");
+        logger.info("Letter fields were filled in");
         return this;
     }
 
@@ -45,18 +40,14 @@ public class DraftLetterTemplatePage extends BasePage {
         try {
             $(By.xpath(CAPTCHA_POPUP)).waitUntil(disappears, 10000);
         } catch (Exception e) {
-            //  logger.info("There is a captcha protection. Type it manually");
+            logger.info("There is a captcha protection. Type it manually");
         }
         return new CommonPage();
     }
 
-    public List<String> findLetterAttributes() {
-        letterAttributes = new ArrayList<>();
-        String actualSubjectValue = $(By.xpath(SUBJECT_FIELD)).getAttribute("value");
-        letterAttributes.add(actualSubjectValue);
-        String actualBodyValue = $(By.xpath(MAIL_BODY_FIELD)).getText();
-        letterAttributes.add(actualBodyValue);
-        return letterAttributes;
+    public void checkThatLetterAttributesAreCorrect() {
+        $(By.xpath(SUBJECT_FIELD)).shouldHave(attribute("value", LetterFieldsFiller.withDataFromProperty().getMailSubject()));
+        $(By.xpath(MAIL_BODY_FIELD)).shouldHave(text(LetterFieldsFiller.withDataFromProperty().getMailBody()));
     }
 
     public void fillInLetterRecipient(String letterRecipient) {
