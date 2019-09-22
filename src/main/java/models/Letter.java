@@ -3,6 +3,7 @@ package models;
 import service.LetterFieldsFiller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Letter {
@@ -29,8 +30,8 @@ public class Letter {
         return mailBody;
     }
 
-    public ArrayList<String> getLetterSubjectAndBody() {
-        ArrayList<String> letterAttributes = new ArrayList<>();
+    public List<String> getLetterSubjectAndBody() {
+        List<String> letterAttributes = new ArrayList<>();
         letterAttributes.add(LetterFieldsFiller.withDataFromProperty().getMailSubject());
         letterAttributes.add(LetterFieldsFiller.withDataFromProperty().getMailBody());
         return letterAttributes;    }
