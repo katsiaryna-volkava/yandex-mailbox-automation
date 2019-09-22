@@ -21,29 +21,23 @@ import java.time.format.DateTimeFormatter;
 public class TestListener implements ITestListener {
     private Logger log = LogManager.getRootLogger();
 
-    String testName = null;
-
     public void onTestStart(ITestResult iTestResult) {
-        testName = iTestResult.getMethod().getMethodName();
         log.info("----------------------------------------------------------------------------");
-        log.info(String.format("Test %s has started", testName));
+        log.info(String.format("Test %s has started", iTestResult.getMethod().getMethodName()));
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
-        testName = iTestResult.getMethod().getMethodName();
-        log.info(String.format("Test %s has started", testName));
+        log.info(String.format("Test %s has started", iTestResult.getMethod().getMethodName()));
 
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        testName = iTestResult.getMethod().getMethodName();
         saveScreenshot();
-        log.info(String.format("Test %s has failed", testName));
+        log.info(String.format("Test %s has failed", iTestResult.getMethod().getMethodName()));
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
-        testName = iTestResult.getMethod().getMethodName();
-        log.info(String.format("Test %s has skipped", testName));
+        log.info(String.format("Test %s has skipped", iTestResult.getMethod().getMethodName()));
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
@@ -58,7 +52,7 @@ public class TestListener implements ITestListener {
 
     }
 
-    private void saveScreenshot(){
+    private void saveScreenshot() {
         File screenCapture = ((TakesScreenshot) DriverSingleton
                 .getDriver())
                 .getScreenshotAs(OutputType.FILE);
@@ -72,8 +66,8 @@ public class TestListener implements ITestListener {
         }
     }
 
-    private String getCurrentTimeAsString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "uuuu-MM-dd_HH-mm-ss" );
+    private String getCurrentTimeAsString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
         return ZonedDateTime.now().format(formatter);
     }
 }
