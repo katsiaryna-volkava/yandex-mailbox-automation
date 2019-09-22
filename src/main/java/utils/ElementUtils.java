@@ -8,6 +8,9 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ElementUtils {
 
+    private ElementUtils() {
+    }
+
     public static void clickOnElementAndTypeData(WebDriver driver, WebElement element, String data) {
         Actions action = new Actions(driver);
         action.moveToElement(element)
