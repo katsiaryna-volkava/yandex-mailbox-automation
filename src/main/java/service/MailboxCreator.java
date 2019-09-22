@@ -4,6 +4,9 @@ import models.Mailbox;
 
 public class MailboxCreator {
 
+    private MailboxCreator() {
+    }
+
     public static final String TESTDATA_MAILBOX_NAME = "testdata.mailbox.name";
     public static final String TESTDATA_MAILBOX_PASSWORD = "testdata.mailbox.password";
 
