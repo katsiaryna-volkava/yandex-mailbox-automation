@@ -49,8 +49,7 @@ public class CommonPage extends BasePage {
     }
 
     public String findTheNameOfMailboxYouAreLoggedInto() {
-        String mailboxName = mailboxIndication.getText();
-        return mailboxName;
+        return mailboxIndication.getText();
     }
 
     public DraftLetterTemplatePage openTemplateForWritingNewLetter() {
