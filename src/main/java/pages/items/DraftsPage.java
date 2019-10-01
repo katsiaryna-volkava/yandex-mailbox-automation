@@ -16,15 +16,12 @@ public class DraftsPage extends BasePage {
     @FindBy(xpath = DRAFT_LETTER)
     private WebElement draftLetter;
 
-    public DraftsPage(WebDriver driver) {
-        super(driver);
-    }
 
     public DraftLetterTemplatePage openDraftLetter() {
         waitForPageToBeLoaded();
         ElementUtils.clickOnElement(driver, draftLetter);
         logger.info("Draft letter was opened");
-        return new DraftLetterTemplatePage(driver);
+        return new DraftLetterTemplatePage();
     }
 
     @Override

@@ -25,15 +25,12 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = PROCEED_BUTTON)
     private WebElement proceedButton;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
 
     public CommonPage enterCredentials(Mailbox mailbox) {
         userEntersLoginName(mailbox.getMailboxName());
         userEntersPasswordValue(mailbox.getMailboxPassword());
         logger.info("Login was performed");
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
 
@@ -50,7 +47,7 @@ public class LoginPage extends BasePage {
         ElementUtils.highlightElement(driver, By.xpath(PASSWORD_INPUT));
         ElementUtils.clickOnElementAndTypeData(driver, passwordField, mailboxPassword);
         ElementUtils.clickElementJs(driver, proceedButton);
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
     public boolean checkThatYouHaveLoggedOff() {

@@ -44,28 +44,24 @@ public class CommonPage extends BasePage {
     private WebElement sentMailFolder;
 
 
-    public CommonPage(WebDriver driver) {
-        super(driver);
-    }
-
     public String findTheNameOfMailboxYouAreLoggedInto() {
         return mailboxIndication.getText();
     }
 
     public DraftLetterTemplatePage openTemplateForWritingNewLetter() {
         writeNewLetterButton.click();
-        return new DraftLetterTemplatePage(driver);
+        return new DraftLetterTemplatePage();
     }
 
     public DraftsPage goToDraftsPage() {
         draftsFolder.click();
-        return new DraftsPage(driver);
+        return new DraftsPage();
     }
 
     public SentMailPage goToSentMailFolder() {
         sentMailFolder.click();
         resfreshCurrentPage();
-        return new SentMailPage(driver);
+        return new SentMailPage();
     }
 
     public LoginPage exitFromCurrentMailbox() {
@@ -78,7 +74,7 @@ public class CommonPage extends BasePage {
         WaitUtils.waitUntilVisibilityOfElement(driver, exitButton);
         ElementUtils.clickOnElement(driver, exitButton);
         logger.info("Log out was performed");
-        return new LoginPage(driver);
+        return new LoginPage();
     }
 
     @Override

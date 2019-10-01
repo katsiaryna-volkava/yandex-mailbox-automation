@@ -50,14 +50,19 @@ public class DraftLetterTemplatePage extends BasePage {
     @FindBy(xpath = CAPTCHA_INPUT_FIELD)
     private WebElement captchaInput;
 
-    public DraftLetterTemplatePage(WebDriver driver) {
-        super(driver);
-    }
 
     public DraftLetterTemplatePage fillInLetterFields(Letter letter) {
         fillInLetterSubject(letter.getMailSubject());
-        fillInLetterRecipient(letter.getMailRecipint());
+        fillInLetterRecipient(letter.getMailRecipient());
         fillInLetterBody(letter.getMailBody());
+        logger.info("Letter fields were filled in");
+        return this;
+    }
+
+    public DraftLetterTemplatePage fillInLetterWithDataFromTest(String subject, String recipient, String body) {
+        fillInLetterSubject(subject);
+        fillInLetterRecipient(recipient);
+        fillInLetterBody(body);
         logger.info("Letter fields were filled in");
         return this;
     }
@@ -65,7 +70,7 @@ public class DraftLetterTemplatePage extends BasePage {
     public CommonPage closeLetterWithoutSaving() {
         closeButton.click();
         closeConfirmButton.click();
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
     public CommonPage sendLetter() {
@@ -76,7 +81,7 @@ public class DraftLetterTemplatePage extends BasePage {
         } catch (Exception e) {
             logger.info("There is a captcha protection. Type it manually");
         }
-        return new CommonPage(driver);
+        return new CommonPage();
     }
 
     public List<String> findLetterAttributes() {

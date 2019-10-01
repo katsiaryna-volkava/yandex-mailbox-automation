@@ -8,18 +8,18 @@ import java.util.Objects;
 
 public class Letter {
 
-    private String mailRecipint;
+    private String mailRecipient;
     private String mailSubject;
     private String mailBody;
 
-    public Letter(String mailRecipint, String mailSubject, String mailBody) {
-        this.mailRecipint = mailRecipint;
+    public Letter(String mailRecipient, String mailSubject, String mailBody) {
+        this.mailRecipient = mailRecipient;
         this.mailSubject = mailSubject;
         this.mailBody = mailBody;
     }
 
-    public String getMailRecipint() {
-        return mailRecipint;
+    public String getMailRecipient() {
+        return mailRecipient;
     }
 
     public String getMailSubject() {
@@ -41,13 +41,13 @@ public class Letter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Letter letter = (Letter) o;
-        return getMailRecipint().equals(letter.getMailRecipint()) &&
+        return getMailRecipient().equals(letter.getMailRecipient()) &&
                 getMailSubject().equals(letter.getMailSubject()) &&
                 getMailBody().equals(letter.getMailBody());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMailRecipint(), getMailSubject(), getMailBody());
+        return Objects.hash(getMailRecipient(), getMailSubject(), getMailBody());
     }
 }

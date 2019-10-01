@@ -15,16 +15,13 @@ public class SentMailPage extends BasePage {
     @FindBy(xpath = SENT_LETTER)
     private WebElement sentLetter;
 
-    public SentMailPage(WebDriver driver) {
-        super(driver);
-    }
 
     public SentLetterTemplatePage openSentLetter() {
         resfreshCurrentPage();
         waitForPageToBeLoaded();
         sentLetter.click();
         logger.info("Letter was sent");
-        return new SentLetterTemplatePage(driver);
+        return new SentLetterTemplatePage();
     }
 
     @Override

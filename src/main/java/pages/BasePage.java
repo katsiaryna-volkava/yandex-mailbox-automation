@@ -1,5 +1,6 @@
 package pages;
 
+import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
@@ -12,8 +13,8 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected final Logger logger = LogManager.getRootLogger();
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    public BasePage() {
+        this.driver = DriverSingleton.getDriver();
         waitForPageToBeLoaded();
         initializePageFactory();
     }

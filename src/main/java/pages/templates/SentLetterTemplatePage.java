@@ -18,9 +18,6 @@ public class SentLetterTemplatePage extends BasePage {
     @FindBy(xpath = SENT_LETTER_SUBJECT)
     private WebElement letterSubject;
 
-    public SentLetterTemplatePage(WebDriver driver) {
-        super(driver);
-    }
 
     public String getLetterSubject() {
         WaitUtils.waitUntilVisibilityOfElementLocatedBy(driver, By.xpath(SENT_LETTER_SUBJECT));

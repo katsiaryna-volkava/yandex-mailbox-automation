@@ -1,3 +1,8 @@
+package steps;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
 import driver.DriverSingleton;
 import models.Letter;
 import models.Mailbox;
@@ -10,15 +15,12 @@ import utils.TestListener;
 import java.util.concurrent.TimeUnit;
 
 @Listeners({TestListener.class})
-public class CommonConditions {
+public class ScenarioHooks {
 
     protected WebDriver driver;
-    protected Mailbox testMailbox = MailboxCreator.withCredentialsFromProperty();
-    protected Letter testLetter = LetterFieldsFiller.withDataFromProperty();
-
     private static final String LOGIN_PAGE_URL = "https://mail.yandex.by";
 
-    @BeforeMethod
+    @Before
     public void browserSetup() {
         setUpDriver();
         maximazeBrowser();
@@ -43,7 +45,7 @@ public class CommonConditions {
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
     }
 
-    @AfterMethod
+    @After
     public void browserClose() {
         DriverSingleton.closeDriver();
     }
