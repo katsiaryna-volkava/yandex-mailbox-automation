@@ -25,16 +25,15 @@ public class TestListener implements ITestListener {
 
     public void onTestSuccess(ITestResult iTestResult) {
         log.info(String.format("Test %s has started", iTestResult.getMethod().getMethodName()));
-
     }
 
     public void onTestFailure(ITestResult iTestResult) {
         saveScreenshot();
-        log.info(String.format("Test %s has failed", iTestResult.getMethod().getMethodName()));
+        log.error(String.format("Test %s has failed", iTestResult.getMethod().getMethodName()));
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
-        log.info(String.format("Test %s has skipped", iTestResult.getMethod().getMethodName()));
+        log.warn(String.format("Test %s has skipped", iTestResult.getMethod().getMethodName()));
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
